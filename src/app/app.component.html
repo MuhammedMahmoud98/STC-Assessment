@@ -1,0 +1,6 @@
+<ng-container *ngIf="(isProductsLoading$ | async)">
+  <mat-progress-bar class="stc-progress" mode="indeterminate"></mat-progress-bar>
+</ng-container>
+<app-nav-bar></app-nav-bar>
+<router-outlet></router-outlet>
+

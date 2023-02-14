@@ -1,0 +1,42 @@
+<section>
+  <div class="dialog-head">
+    {{data?.title}}
+  </div>
+  <div class="dialog-body">
+    <mat-progress-bar mode="indeterminate" *ngIf="isDialogLoading$ | async"></mat-progress-bar>
+    <form [formGroup]="dialogForm" *ngIf="(categories$ | async) as categories" (ngSubmit)="addNewProduct()">
+      <ng-container *ngFor="let key of formKeys">
+        <ng-container [ngSwitch]="key">
+          <mat-form-field *ngSwitchCase="'price'" appearance="fill" class="w-100">
+            <mat-label>Product {{key}}</mat-label>
+            <input type="number" [min]="0" [max]="1000" matInput [formControlName]="key" [placeholder]="'Enter product' + key">
+            <mat-icon matSuffix class="primary-text">attach_money</mat-icon>
+          </mat-form-field>
+          <ng-container *ngSwitchCase="'category'">
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Select Category</mat-label>
+              <mat-select formControlName="category">
+                <mat-option *ngFor="let category of categories" [value]="category">{{category | titlecase}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ng-container>
+          <mat-form-field *ngSwitchCase="'image'" appearance="fill" class="w-100">
+            <mat-label>Product {{key}}</mat-label>
+            <input matInput [formControlName]="key" [placeholder]="'Enter product ' + key + ' link'">
+            <mat-icon matSuffix class="primary-text">attach_money</mat-icon>
+          </mat-form-field>
+          <mat-form-field *ngSwitchDefault appearance="fill" class="w-100">
+            <mat-label>Product {{key}}</mat-label>
+            <input matInput [formControlName]="key" [placeholder]="'Enter product ' + key">
+            <mat-icon matSuffix class="primary-text">{{key}}</mat-icon>
+          </mat-form-field>
+        </ng-container>
+      </ng-container>
+      <mat-divider></mat-divider>
+      <div class="dialog-footer">
+        <button mat-button mat-dialog-close class="mx-2">Cancel</button>
+        <button mat-raised-button color="primary" [disabled]="dialogForm.invalid || (isDialogLoading$ | async) || dialogForm.pristine">{{mode === 'add' ? 'Add product' : mode === 'edit' ? 'Edit product' : 'Delete product'}}</button>
+      </div>
+    </form>
+  </div>
+</section>

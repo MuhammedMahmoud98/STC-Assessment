@@ -1,0 +1,29 @@
+<mat-toolbar class="stc-nav-bar" *ngIf="(user$ | async) as user">
+  <div class="app-logo-wrapper">
+    <img src="./assets/images/logo.svg" class="app-logo" alt="app-logo">
+  </div>
+  <div class="nav-list-wrapper">
+    <button *ngFor="let route of navRoutes" matRipple [routerLink]="route?.path" [routerLinkActive]="route?.activeClass" class="route-button">
+      {{route?.name | titlecase}}
+    </button>
+  </div>
+  <div class="nav-menu">
+    <button mat-button class="nav-info" [matMenuTriggerFor]="menu">
+      <ng-container *ngIf="(isAdmin$ | async) as isAdmin">
+        <div class="info-wrapper">
+          <div class="role-title">{{isAdmin ? 'Super Admin': 'STC User'}}</div>
+          <div class="user-name">{{user?.userName | titlecase}}</div>
+        </div>
+      </ng-container>
+      <img src="./assets/images/pp.jpg" class="user-img" alt="user-image">
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item class="d-flex align-items-center justify-content-between">
+        <span class="material-icons-outlined">
+          logout
+        </span>
+        Logout
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>

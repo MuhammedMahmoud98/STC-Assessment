@@ -1,0 +1,86 @@
+@import "variables";
+
+@mixin RateDefaults {
+  padding: 0.2rem;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.primary-text {
+  color: $primary-color;
+}
+
+.active-route {
+  background-color: $active-route-bg;
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: $primary-color;
+    z-index: 999;
+  }
+  &:hover {
+    background-color: rgba($primary-color, 0.2) !important;
+  }
+}
+
+.stc-progress {
+  position: fixed;
+  top: 68px;
+  left: 0;
+  right: 0;
+}
+
+.stc-success-rate {
+  @include RateDefaults;
+  color: $success-color;
+  background-color: rgba($success-color, 0.1);
+}
+
+.stc-warning-rate {
+  @include RateDefaults;
+  color: $warning-color;
+  background-color: rgba($warning-color, 0.1);
+}
+
+.stc-danger-rate {
+  @include RateDefaults;
+  color: $danger-color;
+  background-color: rgba($danger-color, 0.19);
+}
+
+.stc-dialog-defaults {
+  .mat-dialog-container {
+    padding: 0;
+    overflow: hidden;
+  }
+  .dialog-head {
+    background-color: $primary-color;
+    padding: 1rem;
+    color: #fff;
+  }
+  .dialog-body {
+    padding: 0.5rem 1rem;
+    .dialog-footer {
+      margin-top: 0.5rem;
+      text-align: right;
+    }
+  }
+}
+
+.success-snack {
+  padding: 1rem;
+  background-color: $success-color !important;
+  color: #fff;
+}
+
+.failed-snack {
+  padding: 1rem;
+  background-color: $danger-color !important;
+  color: #fff;
+}

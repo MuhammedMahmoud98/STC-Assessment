@@ -1,0 +1,25 @@
+<section class="admin-wrapper">
+  <div class="container-fluid">
+    <div class="admin-header">
+      <div class="row">
+        <div class="col-md-4">
+          <form>
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Products search</mat-label>
+              <input matInput placeholder="Search for products" #searchInput>
+              <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+          </form>
+        </div>
+        <div class="col-md-8">
+          <div class="header-actions">
+            <button [disabled]="isProductsLoading | async" mat-raised-button color="primary" [matTooltip]="'Add product'" (click)="addProduct()">{{'add new product' | uppercase}}</button>
+          </div>
+        </div>
+      </div>
+      <div class="products-search-form">
+        <app-products-table [products]="products$ | async" [searchInputValue]="searchInput.value"></app-products-table>
+      </div>
+    </div>
+  </div>
+</section>

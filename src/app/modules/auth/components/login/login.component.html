@@ -1,0 +1,35 @@
+<section class="d-flex align-items-center justify-content-start justify-content-lg-center flex-column vh-100">
+  <!-- Language Switcher Component -->
+  <app-language-switcher></app-language-switcher>
+  <form class="loginForm auth-card" [formGroup]="loginForm" #form="ngForm" (ngSubmit)="login()">
+    <div class="login-header text-center">
+      <h1>Welcome Back</h1>
+      <p class="credentials-text">Enter you credentials to access your account</p>
+    </div>
+    <!-- Username -->
+    <mat-form-field appearance="fill" class="d-block">
+      <mat-label>Username</mat-label>
+      <input matInput placeholder="Username" formControlName="userName" required>
+      <span matSuffix>
+        <span class="material-icons-outlined primary-text">person</span>
+      </span>
+    </mat-form-field>
+    <!-- Password -->
+    <mat-form-field appearance="fill" class="d-block">
+      <mat-label>Password</mat-label>
+      <input matInput placeholder="Password" [type]="showPassword ? 'text': 'password'" formControlName="password" required>
+      <span matSuffix>
+        <span class="material-icons-outlined primary-text">shield</span>
+      </span>
+    </mat-form-field>
+    <mat-slide-toggle
+      (change)="togglePassword()"
+      class="mb-3"
+      color="primary"
+      [checked]="showPassword">
+      Show password
+    </mat-slide-toggle>
+    <button [disabled]="form.invalid" mat-raised-button color="primary" class="w-100">Sign in</button>
+    <p class="text-center mt-2">Don't have an account? <a class="primary-text" routerLink="/auth/register">Sign up</a></p>
+  </form>
+</section>

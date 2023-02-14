@@ -1,0 +1,71 @@
+@import "../../../../assets/scss/variables";
+
+@mixin FlexBetween {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+:host::ng-deep {
+  .mat-button-wrapper {
+    display: flex;
+    gap: 20px;
+  }
+}
+
+.stc-nav-bar {
+  @include FlexBetween;
+  .app-logo {
+    width: 50px;
+  }
+  .nav-list-wrapper {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 15px;
+    .route-button {
+      height: inherit;
+      outline: none;
+      border: none;
+      font-size: map-get($font-sizes, 'normal');
+      padding: 0 2rem;
+      color: $primary-color;
+      &:hover {
+        background-color: $light-bg;
+      }
+    }
+  }
+  .nav-menu {
+    height: 100%;
+    display: flex;
+    .nav-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .user-img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+      .info-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        line-height: 20px;
+        .role-title {
+          font-size: map-get($font-sizes, 'small');
+        }
+        .user-name {
+          font-size: map-get($font-sizes, 'x-small');
+        }
+      }
+    }
+    button {
+      height: inherit;
+    }
+  }
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+

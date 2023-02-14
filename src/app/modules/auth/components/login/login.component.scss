@@ -1,0 +1,16 @@
+@import "../../../../../assets/scss/variables";
+section {
+  .loginForm {
+    width: 500px;
+    .login-header {
+      h1 {
+        margin-bottom: 0.2rem;
+        color: $primary-color;
+        font-weight: bold;
+      }
+      .credentials-text {
+        color: $text-muted;
+      }
+    }
+  }
+}
