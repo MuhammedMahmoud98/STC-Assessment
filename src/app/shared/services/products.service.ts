@@ -19,4 +19,8 @@ export class ProductsService {
   addNewProduct(productPayload: Omit<Product, 'id' | 'rating'>): Observable<Product> {
     return this.http.post<Product>(`${environment.baseUrl}/products`, productPayload);
   }
+
+  updateProduct(productPayload: Product): Observable<Product> {
+    return this.http.put<Product>(`${environment.baseUrl}/products/${productPayload?.id}`, productPayload);
+  }
 }

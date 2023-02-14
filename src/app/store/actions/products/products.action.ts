@@ -29,3 +29,18 @@ export const addNewProductFailed = createAction(
   '[PRODUCTS] ADD NEW PRODUCT FAILED',
   props<{errorMessage: string}>(),
 );
+
+export const updateProduct = createAction(
+  '[PRODUCTS] UPDATE PRODUCT',
+  props<{product?: Product}>(),
+);
+
+export const updateProductSuccess = createAction(
+  '[PRODUCTS] UPDATE PRODUCT SUCCESS',
+  props<{product?: Product}>(),
+);
+
+export const updateProductFailed = createAction(
+  '[PRODUCTS] UPDATE PRODUCT SUCCESS',
+  props<{errorMessage?: string}>(),
+);

@@ -9,7 +9,7 @@ import {
   addNewProduct, addNewProductFailed, addNewProductSuccess,
   getAllProducts,
   getAllProductsFailed,
-  getAllProductsSuccess,
+  getAllProductsSuccess, updateProduct, updateProductFailed, updateProductSuccess,
 } from '../../actions/products/products.action';
 
 @Injectable()
@@ -35,4 +35,13 @@ export class ProductsEffect {
     )),
     catchError((err) => of(addNewProductFailed({ errorMessage: 'Product failed to be added' }))),
   ));
+
+  updateProduct$ = createEffect(() => this.action$.pipe(
+    ofType(updateProduct),
+    switchMap((action) => this.productsService.updateProduct(action.product).pipe(
+      map((product) => updateProductSuccess({ product: { ...product, rating: { rate: 4.2, count: 54 } } })),
+      tap(() => this.productsService.closeDialog$.next(true)),
+    )),
+    catchError((err) => of(updateProductFailed({ errorMessage: 'Product failed to be updated' }))),
+  ))
 }

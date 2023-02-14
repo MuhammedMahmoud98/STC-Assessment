@@ -4,7 +4,7 @@
   </div>
   <div class="dialog-body">
     <mat-progress-bar mode="indeterminate" *ngIf="isDialogLoading$ | async"></mat-progress-bar>
-    <form [formGroup]="dialogForm" *ngIf="(categories$ | async) as categories" (ngSubmit)="addNewProduct()">
+    <form [formGroup]="dialogForm" *ngIf="(categories$ | async) as categories" (ngSubmit)="mode === 'add' ? addNewProduct() : updateProduct()">
       <ng-container *ngFor="let key of formKeys">
         <ng-container [ngSwitch]="key">
           <mat-form-field *ngSwitchCase="'price'" appearance="fill" class="w-100">

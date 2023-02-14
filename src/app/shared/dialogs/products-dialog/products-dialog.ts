@@ -10,10 +10,10 @@ import { takeUntil, tap } from 'rxjs/operators';
 import { DialogData } from '../../../models/dialog.model';
 import { getAllCategoriesSelector } from '../../../store/selectors/categories/categories.selector';
 import { isDialogLoadingSelector } from '../../../store/selectors/products/products.selector';
-import { addNewProduct } from '../../../store/actions/products/products.action';
+import { addNewProduct, updateProduct } from '../../../store/actions/products/products.action';
 import { ProductsService } from '../../services/products.service';
 import { SnackBarService } from '../../services/snack-bar.service';
-import {MODES} from "../../enums/products.enum";
+import { MODES } from '../../enums/products.enum';
 
 @Component({
   selector: 'app-products-dialog',
@@ -77,6 +77,12 @@ export class ProductsDialogComponent implements OnInit, OnDestroy, AfterViewInit
   addNewProduct(): void {
     const product = this.dialogForm.value;
     this.store.dispatch(addNewProduct({ product }));
+  }
+
+  updateProduct() {
+    const { id, rating } = this.data.product;
+    const product = { ...this.dialogForm.value, rating, id };
+    this.store.dispatch(updateProduct({ product }));
   }
 
   closeDialogListener() {
