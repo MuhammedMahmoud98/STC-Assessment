@@ -1,6 +1,5 @@
 import {
-  AfterViewInit,
-  ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild,
+  ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild,
 } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';

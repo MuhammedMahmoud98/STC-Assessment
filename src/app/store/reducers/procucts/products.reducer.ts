@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import { postcss } from '@angular-devkit/build-angular/src/webpack/plugins/postcss-cli-resources';
 import { Product } from '../../../models/products.model';
 import {
-  addNewProduct, addNewProductFailed, addNewProductSuccess,
+  addNewProduct, addNewProductFailed, addNewProductSuccess, deleteProduct, deleteProductFailed, deleteProductSuccess,
   getAllProducts,
   getAllProductsFailed,
   getAllProductsSuccess, updateProduct, updateProductFailed, updateProductSuccess,
@@ -83,6 +83,27 @@ export const productsReducer = createReducer(
     ...state,
     hasError: true,
     isModalLoading: false,
+    errorMessage: action.errorMessage,
+  })),
+  on(deleteProduct, (state) => ({
+    ...state,
+    isModalLoading: true,
+    hasError: false,
+  })),
+  on(deleteProductSuccess, (state, action) => {
+    const products = { ...state.products };
+    const filteredProducts = products.filter((product) => product.id !== action.productId);
+    return {
+      ...state,
+      products: filteredProducts,
+      hasError: false,
+      isModalLoading: false,
+    };
+  }),
+  on(deleteProductFailed, (state, action) => ({
+    ...state,
+    isModalLoading: false,
+    hasError: true,
     errorMessage: action.errorMessage,
   })),
 );

@@ -85,6 +85,10 @@ export class ProductsDialogComponent implements OnInit, OnDestroy, AfterViewInit
     this.store.dispatch(updateProduct({ product }));
   }
 
+  deleteProduct() {
+
+  }
+
   closeDialogListener() {
     this.productsService.closeDialog$.pipe(
       tap((dialogValue = false) => {
