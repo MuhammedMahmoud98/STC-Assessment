@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import {
   animate, style, transition, trigger,
 } from '@angular/animations';
+import { takeUntil, tap } from 'rxjs/operators';
 import { Product } from '../../models/products.model';
 import { getAllCategoriesSelector } from '../../store/selectors/categories/categories.selector';
 import { getAllProductsSelector, isProductsLoadingSelector } from '../../store/selectors/products/products.selector';
 import { getAllProducts } from '../../store/actions/products/products.action';
+import { isAdminSelector } from '../../store/selectors/login/login.selector';
 
 @Component({
   selector: 'app-end-user',
@@ -25,7 +27,7 @@ import { getAllProducts } from '../../store/actions/products/products.action';
     ]),
   ],
 })
-export class EndUserComponent implements OnInit {
+export class EndUserComponent implements OnInit, OnDestroy {
   categories$: Observable<string[]>;
 
   products$: Observable<Product[]>;
@@ -34,6 +36,8 @@ export class EndUserComponent implements OnInit {
 
   selectedCategory = 'All';
 
+  destroyed$: Subject<boolean> = new Subject<boolean>();
+
   constructor(private readonly store: Store) { }
 
   ngOnInit(): void {
@@ -41,8 +45,22 @@ export class EndUserComponent implements OnInit {
     this.storeSelectors();
   }
 
+  ngOnDestroy(): void {
+    this.destroyed$.next();
+    this.destroyed$.complete();
+  }
+
   loadProducts(): void {
-    this.store.dispatch(getAllProducts());
+    this.store.pipe(
+      select(isAdminSelector),
+      tap((isAdmin) => {
+        console.log(isAdmin, 'IS ADMIN');
+        if (!isAdmin) {
+          this.store.dispatch(getAllProducts());
+        }
+      }),
+      takeUntil(this.destroyed$),
+    ).subscribe();
   }
 
   storeSelectors(): void {
