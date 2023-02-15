@@ -8,6 +8,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
@@ -19,6 +20,8 @@ import { ProductsEffect } from './store/effects/products/products.effect';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { CategoriesService } from './shared/services/categories.service';
 import { CategoriesEffect } from './store/effects/categories/categories.effect';
+import { SnackBarService } from './shared/services/snack-bar.service';
+import { AuthValidationService } from './shared/services/auth-validation.service';
 // handles translation
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -49,7 +52,13 @@ export function HttpLoaderFactory(http: HttpClient) {
       logOnly: environment.production, // Restrict extension to log-only mode
     }),
   ],
-  providers: [ProductsService, CategoriesService],
+  providers: [
+    ProductsService,
+    CategoriesService,
+    SnackBarService,
+    AuthValidationService,
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+  ],
   bootstrap: [AppComponent],
   exports: [
     TruncatePipe,
