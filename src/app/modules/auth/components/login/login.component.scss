@@ -14,3 +14,13 @@ section {
     }
   }
 }
+
+
+@media only screen and (max-width: 992px) {
+  section {
+    .loginForm {
+      width: auto;
+    }
+  }
+
+}
