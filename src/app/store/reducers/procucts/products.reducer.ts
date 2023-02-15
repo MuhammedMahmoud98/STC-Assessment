@@ -1,5 +1,4 @@
 import { createReducer, on } from '@ngrx/store';
-import { postcss } from '@angular-devkit/build-angular/src/webpack/plugins/postcss-cli-resources';
 import { Product } from '../../../models/products.model';
 import {
   addNewProduct, addNewProductFailed, addNewProductSuccess, deleteProduct, deleteProductFailed, deleteProductSuccess,
@@ -91,11 +90,11 @@ export const productsReducer = createReducer(
     hasError: false,
   })),
   on(deleteProductSuccess, (state, action) => {
-    const products = { ...state.products };
+    const products = [...state.products];
     const filteredProducts = products.filter((product) => product.id !== action.productId);
     return {
       ...state,
-      products: filteredProducts,
+      products: [...filteredProducts],
       hasError: false,
       isModalLoading: false,
     };

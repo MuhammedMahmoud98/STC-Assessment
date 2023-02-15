@@ -5,7 +5,7 @@
   <div class="dialog-body">
     <mat-progress-bar mode="indeterminate" *ngIf="isDialogLoading$ | async"></mat-progress-bar>
     <!-- IF MODE IS NOT DELETE -->
-    <ng-container *ngIf="mode !== 'delete'">
+    <ng-container *ngIf="mode !== 'delete'; else deleteMode">
       <form [formGroup]="dialogForm" *ngIf="(categories$ | async) as categories" (ngSubmit)="mode === 'add' ? addNewProduct() : updateProduct()">
         <ng-container *ngFor="let key of formKeys">
           <ng-container [ngSwitch]="key">
@@ -25,7 +25,7 @@
             <mat-form-field *ngSwitchCase="'image'" appearance="fill" class="w-100">
               <mat-label>Product {{key}}</mat-label>
               <input matInput [formControlName]="key" [placeholder]="'Enter product ' + key + ' link'">
-              <mat-icon matSuffix class="primary-text">attach_money</mat-icon>
+              <mat-icon matSuffix class="primary-text">insert_photo</mat-icon>
             </mat-form-field>
             <mat-form-field *ngSwitchDefault appearance="fill" class="w-100">
               <mat-label>Product {{key}}</mat-label>
@@ -42,13 +42,15 @@
       </form>
     </ng-container>
     <!-- DELETE BODY -->
-    <div class="delete-wrapper">
-      <p>Are you sure to delete ?</p>
-      <mat-divider></mat-divider>
-      <div class="dialog-footer">
-        <button mat-button mat-dialog-close class="mx-2">Cancel</button>
-        <button mat-raised-button color="primary" [disabled]="(isDialogLoading$ | async)" (click)="deleteProduct()">{{'yes'}}</button>
+    <ng-template #deleteMode>
+      <div class="delete-wrapper">
+        <p>Are you sure to delete product of title <b>{{data.product.title}}</b>?</p>
+        <mat-divider></mat-divider>
+        <div class="dialog-footer">
+          <button mat-button mat-dialog-close class="mx-2">Cancel</button>
+          <button mat-raised-button color="primary" [disabled]="(isDialogLoading$ | async)" (click)="deleteProduct()">{{'yes'}}</button>
+        </div>
       </div>
-    </div>
+    </ng-template>
   </div>
 </section>

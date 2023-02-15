@@ -6,7 +6,7 @@ import {
 import { of } from 'rxjs';
 import { ProductsService } from '../../../shared/services/products.service';
 import {
-  addNewProduct, addNewProductFailed, addNewProductSuccess,
+  addNewProduct, addNewProductFailed, addNewProductSuccess, deleteProduct, deleteProductFailed, deleteProductSuccess,
   getAllProducts,
   getAllProductsFailed,
   getAllProductsSuccess, updateProduct, updateProductFailed, updateProductSuccess,
@@ -43,5 +43,14 @@ export class ProductsEffect {
       tap(() => this.productsService.closeDialog$.next(true)),
     )),
     catchError((err) => of(updateProductFailed({ errorMessage: 'Product failed to be updated' }))),
-  ))
+  ));
+
+  deleteProduct$ = createEffect(() => this.action$.pipe(
+    ofType(deleteProduct),
+    switchMap((action) => this.productsService.deleteProduct(action.productId).pipe(
+      map((product) => deleteProductSuccess({ productId: product?.id })),
+      tap(() => this.productsService.closeDialog$.next(true)),
+    )),
+    catchError((err) => of(deleteProductFailed({ errorMessage: 'Product failed to be deleted' }))),
+  ));
 }

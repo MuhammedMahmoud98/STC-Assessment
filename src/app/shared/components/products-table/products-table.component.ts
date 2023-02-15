@@ -64,6 +64,19 @@ export class ProductsTableComponent implements OnInit, OnChanges {
     });
   }
 
+  deleteProduct(product: Product) {
+    this.dialog.open(ProductsDialogComponent, {
+      width: '600px',
+      panelClass: 'stc-dialog-defaults',
+      disableClose: true,
+      data: {
+        title: 'Delete product dialog',
+        mode: MODES.DELETE,
+        product,
+      },
+    });
+  }
+
   trackByFn(index: number): number {
     return index;
   }
