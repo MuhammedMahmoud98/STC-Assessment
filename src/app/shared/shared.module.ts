@@ -9,6 +9,9 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ProductsTableComponent } from './components/products-table/products-table.component';
 import { TruncatePipe } from '../pipes/truncate.pipe';
 import { ProductsDialogComponent } from './dialogs/products-dialog/products-dialog';
+import { CardSkeletonComponent } from './components/card-skeleton/card-skeleton.component';
+import { StarsComponent } from './components/stars/stars.component';
+import {ProductsFilterPipe} from "../pipes/products-filter.pipe";
 
 @NgModule({
   declarations: [
@@ -17,6 +20,9 @@ import { ProductsDialogComponent } from './dialogs/products-dialog/products-dial
     ProductsTableComponent,
     TruncatePipe,
     ProductsDialogComponent,
+    CardSkeletonComponent,
+    StarsComponent,
+    ProductsFilterPipe,
   ],
   imports: [
     CommonModule,
@@ -34,6 +40,9 @@ import { ProductsDialogComponent } from './dialogs/products-dialog/products-dial
     ProductsTableComponent,
     TruncatePipe,
     ProductsDialogComponent,
+    CardSkeletonComponent,
+    StarsComponent,
+    ProductsFilterPipe,
   ],
 })
 export class SharedModule { }

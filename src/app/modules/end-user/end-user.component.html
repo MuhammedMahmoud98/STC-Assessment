@@ -1,1 +1,24 @@
-<p>end-user works!</p>
+<section class="container-fluid">
+  <div class="end-user-view">
+    <div class="view-header">
+      <h2 class="header-title">STC Products</h2>
+    </div>
+    <!-- PRODUCTS SKELETON -->
+    <ng-container *ngIf="(isProductsLoading$ | async)">
+      <app-card-skeleton></app-card-skeleton>
+    </ng-container>
+    <!-- CATEGORY TAPS -->
+    <ng-container *ngIf="(products$ | async) as products">
+      <ng-container *ngIf="(categories$ | async) as categories">
+        <mat-tab-group (selectedTabChange)="selectedTabCategory($event)" mat-align-tabs="center" class="overflow-hidden" animationDuration="300ms">
+          <mat-tab label="All" class="overflow-hidden">
+            <app-products [products]="products"></app-products>
+          </mat-tab>
+          <mat-tab *ngFor="let category of categories" [label]="category | titlecase" class="overflow-hidden">
+            <app-products [products]="products | productsFilter: selectedCategory"></app-products>
+          </mat-tab>
+        </mat-tab-group>
+      </ng-container>
+    </ng-container>
+  </div>
+</section>

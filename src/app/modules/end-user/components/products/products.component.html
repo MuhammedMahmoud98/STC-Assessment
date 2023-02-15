@@ -1,0 +1,32 @@
+<div class="container-fluid mt-3">
+  <div class="row">
+    <div *ngFor="let product of products;trackBy:trackByFn" class="col-md-4 mb-3">
+      <div class="product-card">
+        <div class="image-wrapper">
+          <div class="img-holder" [style]="{backgroundImage: 'url(' + product.image+ ')'}"></div>
+          <div class="image-layer"></div>
+        </div>
+        <div class="stc-card-footer">
+          <div class="product-info">
+            <span class="product-title" [matTooltip]="product?.title">{{product?.title | truncate: 30}}</span>
+            <span class="product-price">
+              <sup class="dollar-sup">$</sup>
+              <span class="price">{{product?.price}}</span>
+              <div class="rating-wrapper">
+                <app-stars [rate]="product?.rating?.rate"></app-stars>
+              </div>
+            </span>
+            <span class="product-rating"></span>
+          </div>
+          <div class="add-to-cart">
+            <button matTooltip="Add to cart" mat-mini-fab color="primary" aria-label="Example icon button with a home icon">
+              <span class="material-icons-outlined">
+                shopping_cart
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

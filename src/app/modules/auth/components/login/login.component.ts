@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { isLoggedInSelector } from '../../../../store/selectors/login/login.selector';
 import { startLogin } from '../../../../store/actions/Login/login.action';
+import {AuthValidationService} from "../../../../shared/services/auth-validation.service";
 
 @Component({
   selector: 'app-login',
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     public formBuilder: FormBuilder,
     private store: Store,
     private readonly router: Router,
+    private readonly authValidationService: AuthValidationService,
   ) { }
 
   ngOnInit(): void {
@@ -58,7 +60,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       select(isLoggedInSelector),
       tap((loginValue) => {
         if (loginValue) {
-          // this.router.navigate(['/auth/l'])
+          this.authValidationService.authValidation();
         }
       }),
       takeUntil(this.destroyed$),

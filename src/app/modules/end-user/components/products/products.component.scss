@@ -1,0 +1,64 @@
+@import "../../../../../assets/scss/variables";
+
+.product-card {
+  background-color: #fff;
+  border-radius: 7px;
+  height: 100%;
+  box-shadow: $light-shadow;
+  .image-wrapper {
+    position: relative;
+    height: 200px;
+    .image-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      transform: scale(0);
+      opacity: 0;
+      transition: all 0.1s ease-in-out;
+    }
+    .img-holder {
+      height: inherit;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      transition: transform 0.2s ease-out;
+    }
+    &:hover {
+      .img-holder {
+        transform: scale(0.7);
+      }
+      .image-layer {
+        opacity: 1;
+        transform: scale(1);
+        background-color: rgba($primary-color, 0.2);
+      }
+    }
+  }
+  .stc-card-footer {
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .product-info {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      .product-title {
+        font-size: map-get($font-sizes, 'normal');
+        font-weight: 400;
+      }
+      .product-price {
+        .dollar-sup {
+          font-size: map-get($font-sizes, 'small');
+        }
+        .price {
+          font-size: map-get($font-sizes, 'medium');
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}

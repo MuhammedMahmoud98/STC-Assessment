@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { log } from 'util';
 import { User } from '../../../models/user.model';
-import { loginFailed, startLogin } from '../../actions/Login/login.action';
+import {loginFailed, logOut, startLogin} from '../../actions/Login/login.action';
 import { setLoggedInUser } from '../../actions/Users/user.action';
 
 export interface LoginState {
@@ -67,4 +67,8 @@ export const usersReducer = createReducer(
       loggedInUser: {},
     };
   }),
+  on(logOut, (state) => ({
+    ...state,
+    isLoggedIn: false,
+  }))
 );

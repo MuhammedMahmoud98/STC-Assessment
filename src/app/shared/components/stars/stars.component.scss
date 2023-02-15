@@ -1,0 +1,7 @@
+@import "../../../../assets/scss/variables";
+.rating-wrapper {
+  .star-icon {
+    color: $warning-color;
+    font-size: map-get($font-sizes, 'normal');
+  }
+}

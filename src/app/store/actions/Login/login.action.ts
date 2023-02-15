@@ -8,3 +8,7 @@ export const startLogin = createAction(
 export const loginFailed = createAction(
   '[LOGIN] LOGIN FAILED',
 );
+
+export const logOut = createAction(
+  '[LOGIN] LOGOUT',
+);

@@ -1,0 +1,25 @@
+@import "../../../assets/scss/variables";
+
+.end-user-view {
+  margin-top: 1rem;
+  .view-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .header-title {
+      font-size: map-get($font-sizes, 'large');
+      position: relative;
+      &::before {
+        content: '';
+        position: absolute;
+        height: 10px;
+        width: 100%;
+        bottom: 5px;
+        left: 0;
+        right: 0;
+        background-color: rgba($primary-color, 0.1);
+        transform: skewX(45deg);
+      }
+    }
+  }
+}

@@ -38,7 +38,7 @@ $restaurant-management-theme: mat-light-theme((
 @import "assets/scss/global-classes";
 @import '~material-icons/iconfont/material-icons.css';
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #f9fafa; }
+body { margin: 0; font-family: 'Cairo', sans-serif; background-color: #f9fafa; }
 * {
   outline: none !important;
 }

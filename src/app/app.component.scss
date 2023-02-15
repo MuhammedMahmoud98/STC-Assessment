@@ -1,0 +1,20 @@
+.stc-sidenav {
+  position: fixed;
+  width: 260px;
+  .app-logo {
+    width: 50px;
+  }
+  .side-body {
+    padding: 1rem 0rem;
+  }
+
+  .route-button {
+    width: 100%;
+    padding: 1rem 0.5rem;
+    outline: none;
+    border: none;
+    margin-bottom: 1rem;
+  }
+}
+
+

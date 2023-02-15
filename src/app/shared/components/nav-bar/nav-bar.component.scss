@@ -6,12 +6,12 @@
   justify-content: space-between;
 }
 
-:host::ng-deep {
-  .mat-button-wrapper {
-    display: flex;
-    gap: 20px;
-  }
-}
+//:host::ng-deep {
+//  .mat-button-wrapper {
+//    display: flex;
+//    gap: 20px;
+//  }
+//}
 
 .stc-nav-bar {
   @include FlexBetween;

@@ -1,6 +1,33 @@
 <ng-container *ngIf="(isProductsLoading$ | async)">
   <mat-progress-bar class="stc-progress" mode="indeterminate"></mat-progress-bar>
 </ng-container>
-<app-nav-bar></app-nav-bar>
-<router-outlet></router-outlet>
 
+<mat-drawer-container class="min-vh-100" autosize *ngIf="(isLoggedIn$ | async); else loginRoutes">
+  <mat-drawer #drawer class="stc-sidenav" [mode]="isMobile ? 'over' : 'side'">
+    <mat-toolbar>
+      <img src="assets/images/logo.svg" alt="stc-logo" class="app-logo">
+    </mat-toolbar>
+    <div class="side-body">
+      <ng-container *ngIf="isAdmin$ | async">
+        <button *ngFor="let route of navRoutes" matRipple [routerLink]="route?.path" [routerLinkActive]="route?.activeClass" class="route-button">
+          {{route?.name | titlecase}}
+        </button>
+      </ng-container>
+    </div>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <app-nav-bar>
+      <ng-container>
+        <button type="button" mat-icon-button (click)="drawer.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </ng-container>
+    </app-nav-bar>
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>
+
+<ng-template #loginRoutes>
+  <router-outlet></router-outlet>
+</ng-template>

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 import { User } from '../../../models/user.model';
 import { getUserSelector, isAdminSelector } from '../../../store/selectors/login/login.selector';
+import { logOut } from '../../../store/actions/Login/login.action';
 
 @Component({
   selector: 'app-nav-bar',
@@ -14,19 +16,7 @@ export class NavBarComponent implements OnInit {
 
   isAdmin$: Observable<boolean>;
 
-  navRoutes: NavRoutes[] = [
-    {
-      path: '/admin',
-      name: 'admin',
-      activeClass: 'active-route',
-    },
-    {
-      path: '/end-user',
-      name: 'user view',
-      activeClass: 'active-route',
-    }
-  ];
-  constructor(private readonly store: Store) { }
+  constructor(private readonly store: Store, private readonly router: Router) { }
 
   ngOnInit(): void {
     this.getUserSelectors();
@@ -36,11 +26,10 @@ export class NavBarComponent implements OnInit {
     this.user$ = this.store.pipe(select(getUserSelector));
     this.isAdmin$ = this.store.pipe(select(isAdminSelector));
   }
-}
 
-
-interface NavRoutes {
-  path?: string;
-  activeClass?: string;
-  name?: string
+  logOut() {
+    this.store.dispatch(logOut());
+    localStorage.removeItem('stc-user-token');
+    this.router.navigate(['/auth/login']);
+  }
 }

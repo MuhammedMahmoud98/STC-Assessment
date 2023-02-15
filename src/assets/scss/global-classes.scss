@@ -6,6 +6,12 @@
   border-radius: 5px;
 }
 
+.auth-card {
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(black, 0.06);
+  padding: 2rem;
+}
+
 .primary-text {
   color: $primary-color;
 }
@@ -84,3 +90,27 @@
   background-color: $danger-color !important;
   color: #fff;
 }
+
+.rtl {
+  direction: rtl;
+}
+
+.ltr {
+  direction: ltr;
+}
+
+
+@media only screen and (max-width: 992px) {
+  .auth-card {
+    width: 80vw;
+    margin: 0 0.7rem;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .auth-card {
+    width: 90vw;
+    margin: 0 0.7rem;
+  }
+}
+
